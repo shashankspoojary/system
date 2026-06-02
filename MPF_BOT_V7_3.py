@@ -1418,10 +1418,10 @@ def smart_error_recovery(target_button_text, wait_region):
         else:
             # INTERNET ERROR: Text is visible OR the loading bar is moving
             motion_status = "True" if is_moving else "False"
-            print(f"[RECOVERY] Status: STUCK/INTERNET ERROR (Texts: {text_count}, Motion: {motion_status}). Clicking 'OK'...")
+            print(f"[RECOVERY] Status: STUCK/INTERNET ERROR (Texts: {text_count}, Motion: {motion_status}). Pressing 'Enter'...")
             
-            # ⚠️ CHANGE THESE TO YOUR ACTUAL F6 INTERNET ERROR COORDINATE VARIABLES
-            pyautogui.click(error_ok_x, error_ok_y)
+            # Pressing enter instead of clicking coordinates
+            pyautogui.press('enter')
 
         time.sleep(3)
 
@@ -1436,7 +1436,6 @@ def run_upload_and_next_form(mem):
 
     ts_pos = mem.get("take_screenshot_button_pos")
     la_pos = mem.get("load_another_form_button_pos")
-    ie_ok_pos = mem.get("internet_error_ok_pos")
     start_mpf_pos = mem.get("start_mpf_button_pos")  # NEW
 
     if not (upload_pos and ok_pos and flow_region):
@@ -1450,10 +1449,9 @@ def run_upload_and_next_form(mem):
     la_pos = tuple(la_pos) if la_pos else None
 
     def click_ie_ok():
-        if ie_ok_pos:
-            print("[RECOVERY] Clicking Internet Error OK button...")
-            click_abs(ie_ok_pos[0], ie_ok_pos[1])
-            safe_sleep(1.0)
+        print("[RECOVERY] Pressing Enter to clear Internet Error...")
+        pyautogui.press('enter')
+        safe_sleep(1.0)
 
     def click_start_mpf():
         if start_mpf_pos:
@@ -1501,13 +1499,13 @@ def run_upload_and_next_form(mem):
                     _telegram_notify_no_forms("Timeout waiting for Take Screenshot (Internet Error Trigger)", force=True)
                     error_alerted = True
                 
-                # STAGE 2: If we already clicked IE OK and waited 40s, it's a blank page
+                # STAGE 2: If we already pressed Enter and waited 40s, it's a blank page
                 if ie_recovery_attempted:
                     click_start_mpf()
                     deadline = time.time() + 40.0  # Reset timer to wait for UI to load
                     ie_recovery_attempted = False  # Reset so it alternates if it fails again
                 else:
-                    # STAGE 1: Standard Internet Error
+                    # STAGE 1: Standard Internet Error (Press Enter)
                     click_ie_ok()
                     ie_recovery_attempted = True
                     safe_sleep(2.0)
@@ -1549,7 +1547,7 @@ def run_upload_and_next_form(mem):
                     safe_sleep(2.0)
 
                     if wait_for_button_and_click("Load Another Form", flow_region, timeout=4.0, poll_interval=0.7, click_pos=la_pos):
-                        print("[RECOVERY] Load Another Form found after IE OK. Clicked.")
+                        print("[RECOVERY] Load Another Form found after pressing Enter. Clicked.")
                         if error_alerted:
                             _telegram_notify_recovery("Load Another Form found after popup fix. Termination cancelled.")
                             error_alerted = False
@@ -3159,7 +3157,7 @@ def upload_learning_mode_only():
         return
 
     speak("Starting Upload-Only Learning Mode.")
-    print("Upload-Only Learning Mode: capturing Upload / OK / Take Screenshot / Load Another Form / Internet Error / region.")
+    print("Upload-Only Learning Mode: capturing Upload / OK / Take Screenshot / Load Another Form / region.")
 
     speak("Hover over the 'Upload Details' button and press 1.")
     keyboard.wait('1')
@@ -3181,10 +3179,7 @@ def upload_learning_mode_only():
     la = pyautogui.position()
     mem['load_another_form_button_pos'] = [la.x, la.y]
 
-    speak("Now hover over the 'OK' button of the Internet Error popup window and press 5.")
-    keyboard.wait('5')
-    ie = pyautogui.position()
-    mem['internet_error_ok_pos'] = [ie.x, ie.y]
+    speak("Internet Error OK is now automatically handled by the Enter key.")
 
     speak("Now mark the region where loading happens and where these buttons appear.")
     speak("Hover the TOP-LEFT corner of that area and press 6.")
@@ -3204,8 +3199,8 @@ def upload_learning_mode_only():
     print("Upload learning completed and memory saved.")
 def capture_error_recovery_buttons():
     """
-    Mini learning mode: Captures the Internet Error OK button 
-    AND the Start MPF button for blank page recoveries.
+    Mini learning mode: Captures the Start MPF button for blank page recoveries.
+    Internet Error OK is bypassed using the Enter key.
     """
     mem = load_memory()
     if not mem:
@@ -3213,21 +3208,15 @@ def capture_error_recovery_buttons():
         return
 
     speak("Starting Error Recovery Capture Mode.")
-    print("Capture Mode: Internet Error OK & Start MPF Buttons.")
+    speak("Internet error is handled automatically via Enter Key.")
 
-    speak("Hover over the 'OK' button of the Internet Error popup window and press 5.")
-    keyboard.wait('5')
-    ie = pyautogui.position()
-    mem['internet_error_ok_pos'] = [ie.x, ie.y]
-
-    speak("Now hover over the 'Start MPF' button to recover from blank pages and press 6.")
+    speak("Hover over the 'Start MPF' button to recover from blank pages and press 6.")
     keyboard.wait('6')
     smpf = pyautogui.position()
     mem['start_mpf_button_pos'] = [smpf.x, smpf.y]
 
     save_memory(mem)
     speak("Recovery buttons saved successfully.")
-    print(f"Saved Internet Error OK at: {ie.x}, {ie.y}")
     print(f"Saved Start MPF at: {smpf.x}, {smpf.y}")
 def start_info_panel_paddle_session(use_orientation=True):
     from paddle_info_panel_ocr import PaddleInfoPanelSession
@@ -3769,13 +3758,11 @@ def quick_info_panel_signature_old(mem):
     return raw[:60] if raw else None
 
 def _grace_wait_for_new_form(mem, last_signature, timeout_seconds=7*60, poll_interval=1.0, stable_hits=2):
-    ie_ok_pos = mem.get("internet_error_ok_pos")
     start_mpf_pos = mem.get("start_mpf_button_pos")  # NEW
     
-    if ie_ok_pos:
-        print("[RECOVERY] Clicking Internet Error OK before grace wait...")
-        click_abs(ie_ok_pos[0], ie_ok_pos[1])
-        safe_sleep(1.5)
+    print("[RECOVERY] Pressing Enter to clear potential Internet Error before grace wait...")
+    pyautogui.press('enter')
+    safe_sleep(1.5)
 
     la_pos = mem.get("load_another_form_button_pos")
     flow_region = mem.get("upload_flow_region")
