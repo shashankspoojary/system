@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "bot_token": "8493241429:AAGi4NwB5AY-wCDwjZk8efe9eI5hV5mBXtc",
+  "chat_id": "5881523084",
+  "cooldown_seconds": 300,
+  "timeout_seconds": 8,
+  "debug_print": true
+}

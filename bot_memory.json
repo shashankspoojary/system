@@ -1,0 +1,667 @@
+{
+  "anchor": [
+    1262,
+    339
+  ],
+  "spacing": 43,
+  "fields": [
+    {
+      "name": "MBI Code",
+      "type": "typing",
+      "pos": [
+        1252,
+        382
+      ],
+      "index": 1
+    },
+    {
+      "name": "Full Name",
+      "type": "typing",
+      "pos": [
+        1257,
+        421
+      ],
+      "index": 2
+    },
+    {
+      "name": "Gender",
+      "type": "dropdown",
+      "pos": [
+        1277,
+        451
+      ],
+      "index": 3,
+      "dropdown_region_rel": [
+        -42,
+        5,
+        322,
+        79
+      ],
+      "dropdown_sample_rel_y": 20,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Date of Birth",
+      "type": "dob",
+      "day_pos": [
+        1248,
+        485
+      ],
+      "month_pos": [
+        1301,
+        489
+      ],
+      "year_pos": [
+        1366,
+        486
+      ],
+      "index": 3
+    },
+    {
+      "name": "Marital Status",
+      "type": "dropdown",
+      "pos": [
+        1257,
+        523
+      ],
+      "index": 4,
+      "dropdown_region_rel": [
+        -23,
+        5,
+        342,
+        133
+      ],
+      "dropdown_sample_rel_y": 50,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "State",
+      "type": "dropdown",
+      "pos": [
+        1254,
+        559
+      ],
+      "index": 5,
+      "dropdown_region_rel": [
+        -15,
+        18,
+        323,
+        220
+      ],
+      "dropdown_sample_rel_y": 117,
+      "scroll_anchor_rel": [
+        331,
+        59
+      ]
+    },
+    {
+      "name": "District",
+      "type": "dropdown",
+      "pos": [
+        1262,
+        600
+      ],
+      "index": 6,
+      "dropdown_region_rel": [
+       -23,  
+        17,
+        322,
+        266
+      ],
+      "dropdown_sample_rel_y": 138,
+      "scroll_anchor_rel": [
+        323,
+        50
+      ]
+    },
+    {
+      "name": "Taluk",
+      "type": "typing",
+      "pos": [
+        1258,
+        643
+      ],
+      "index": 7
+    },
+    {
+      "name": "Pincode",
+      "type": "typing",
+      "pos": [
+        1257,
+        681
+      ],
+      "index": 8
+    },
+    {
+      "name": "House Type",
+      "type": "dropdown",
+      "pos": [
+        1257,
+        707
+      ],
+      "index": 9,
+      "dropdown_region_rel": [
+        -18,
+        15,
+        343,
+        153
+      ],
+      "dropdown_sample_rel_y": 70,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "RAI Code",
+      "type": "typing",
+      "pos": [
+        1257,
+        801
+      ],
+      "index": 11
+    },
+    {
+      "name": "Mother Tongue",
+      "type": "dropdown",
+      "pos": [
+        1255,
+        831
+      ],
+      "index": 11,
+      "dropdown_region_rel": [
+        -17,
+        15,
+        332,
+        228
+      ],
+      "dropdown_sample_rel_y": 120,
+      "scroll_anchor_rel": [
+        329,
+        74
+      ]
+    },
+    {
+      "name": "Religion",
+      "type": "dropdown",
+      "pos": [
+        1250,
+        870
+      ],
+      "index": 12,
+      "dropdown_region_rel": [
+        -16,
+        5,
+        353,
+        205
+      ],
+      "dropdown_sample_rel_y": 93,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Cast",
+      "type": "dropdown",
+      "pos": [
+        1257,
+        303
+      ],
+      "index": -1,
+      "dropdown_region_rel": [
+        -18,
+        25,
+        326,
+        222
+      ],
+      "dropdown_sample_rel_y": 116,
+      "scroll_anchor_rel": [
+        329,
+        51
+      ]
+    },
+    {
+      "name": "Sub Cast",
+      "type": "dropdown",
+      "pos": [
+        1260,
+        344
+      ],
+      "index": 0,
+      "dropdown_region_rel": [
+        -21,
+        23,
+        324,
+        215
+      ],
+      "dropdown_sample_rel_y": 115,
+      "scroll_anchor_rel": [
+        327,
+        54
+      ]
+    },
+    {
+      "name": "Nakshatra",
+      "type": "dropdown",
+      "pos": [
+        1256,
+        380
+      ],
+      "index": 1,
+      "dropdown_region_rel": [
+        -17,
+        13,
+        331,
+        228
+      ],
+      "dropdown_sample_rel_y": 123,
+      "scroll_anchor_rel": [
+        328,
+        62
+      ]
+    },
+    {
+      "name": "Rashi",
+      "type": "dropdown",
+      "pos": [
+        1266,
+        419
+      ],
+      "index": 2,
+      "dropdown_region_rel": [
+        -32,
+        2,
+        336,
+        228
+      ],
+      "dropdown_sample_rel_y": 122,
+      "scroll_anchor_rel": [
+        319,
+        88
+      ]
+    },
+    {
+      "name": "Pada",
+      "type": "dropdown",
+      "pos": [
+        1262,
+        456
+      ],
+      "index": 3,
+      "dropdown_region_rel": [
+        -24,
+        14,
+        340,
+        129
+      ],
+      "dropdown_sample_rel_y": 69,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "PHI Code",
+      "type": "typing",
+      "pos": [
+        1251,
+        551
+      ],
+      "index": 5
+    },
+    {
+      "name": "Health Info",
+      "type": "dropdown",
+      "pos": [
+        1264,
+        578
+      ],
+      "index": 6,
+      "dropdown_region_rel": [
+        -31,
+        7,
+        333,
+        228
+      ],
+      "dropdown_sample_rel_y": 94,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Any Disability",
+      "type": "dropdown",
+      "pos": [
+        1254,
+        613
+      ],
+      "index": 7,
+      "dropdown_region_rel": [
+        -20,
+        6,
+        343,
+        86
+      ],
+      "dropdown_sample_rel_y": 27,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Diet",
+      "type": "dropdown",
+      "pos": [
+        1260,
+        654
+      ],
+      "index": 7,
+      "dropdown_region_rel": [
+        -26,
+        4,
+        339,
+        177
+      ],
+      "dropdown_sample_rel_y": 73,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Height",
+      "type": "dropdown",
+      "pos": [
+        1263,
+        691
+      ],
+      "index": 8,
+      "dropdown_region_rel": [
+        -23,
+        5,
+        323,
+        225
+      ],
+      "dropdown_sample_rel_y": 94,
+      "scroll_anchor_rel": [
+        321,
+        51
+      ]
+    },
+    {
+      "name": "Weight",
+      "type": "dropdown",
+      "pos": [
+        1249,
+        728
+      ],
+      "index": 9,
+      "dropdown_region_rel": [
+        -10,
+        0,
+        338,
+        226
+      ],
+      "dropdown_sample_rel_y": 125,
+      "scroll_anchor_rel": [
+        335,
+        52
+      ]
+    },
+    {
+      "name": "FAI Code",
+      "type": "typing",
+      "pos": [
+        1258,
+        826
+      ],
+      "index": 11
+    },
+    {
+      "name": "Father Status",
+      "type": "dropdown",
+      "pos": [
+        1259,
+        852
+      ],
+      "index": 12,
+      "dropdown_region_rel": [
+        -25,
+        5,
+        339,
+        84
+      ],
+      "dropdown_sample_rel_y": 23,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Father Name",
+      "type": "typing",
+      "pos": [
+        1255,
+        900
+      ],
+      "index": 13
+    },
+    {
+      "name": "Mother Status",
+      "type": "dropdown",
+      "pos": [
+        1256,
+        406
+      ],
+      "index": 1,
+      "dropdown_region_rel": [
+        -21,
+        1,
+        343,
+        83
+      ],
+      "dropdown_sample_rel_y": 25,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Mother Name",
+      "type": "typing",
+      "pos": [
+        1247,
+        446
+      ],
+      "index": 2
+    },
+    {
+      "name": "Sister",
+      "type": "dropdown",
+      "pos": [
+        1257,
+        480
+      ],
+      "index": 3,
+      "dropdown_region_rel": [
+        -23,
+        3,
+        339,
+        152
+      ],
+      "dropdown_sample_rel_y": 95,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Brother",
+      "type": "dropdown",
+      "pos": [
+        1251,
+        516
+      ],
+      "index": 4,
+      "dropdown_region_rel": [
+        -16,
+        6,
+        345,
+        154
+      ],
+      "dropdown_sample_rel_y": 94,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Children Boy",
+      "type": "dropdown",
+      "pos": [
+        1266,
+        556
+      ],
+      "index": 5,
+      "dropdown_region_rel": [
+        -27,
+        10,
+        334,
+        177
+      ],
+      "dropdown_sample_rel_y": 97,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Children Girl",
+      "type": "dropdown",
+      "pos": [
+        1261,
+        591
+      ],
+      "index": 6,
+      "dropdown_region_rel": [
+        -22,
+        12,
+        338,
+        178
+      ],
+      "dropdown_sample_rel_y": 98,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "ECI Code",
+      "type": "typing",
+      "pos": [
+        1254,
+        687
+      ],
+      "index": 8
+    },
+    {
+      "name": "Education",
+      "type": "dropdown",
+      "pos": [
+        1261,
+        716
+      ],
+      "index": 9,
+      "dropdown_region_rel": [
+        -20,
+        1,
+        300,
+        220
+      ],
+      "dropdown_sample_rel_y": 121,
+      "scroll_anchor_rel": [
+        324,
+        52
+      ]
+    },
+    {
+      "name": "Emp Status",
+      "type": "dropdown",
+      "pos": [
+        1255,
+        751
+      ],
+      "index": 10,
+      "dropdown_region_rel": [
+        -21,
+        8,
+        343,
+        185
+      ],
+      "dropdown_sample_rel_y": 95,
+      "scroll_anchor_rel": null
+    },
+    {
+      "name": "Annual Income",
+      "type": "dropdown",
+      "pos": [
+        1262,
+        791
+      ],
+      "index": 11,
+      "dropdown_region_rel": [
+        -30,
+        4,
+        342,
+        230
+      ],
+      "dropdown_sample_rel_y": 120,
+      "scroll_anchor_rel": [
+        323,
+        84
+      ]
+    }
+  ],
+  "scrollbars": {
+    "main": [
+      1624,
+      437
+    ],
+    "info": [
+      1059,
+      410
+    ]
+  },
+  "main_scroll_triggers": [
+    {
+      "after_field": "Religion",
+      "anchor": [
+        1623,
+        630
+      ]
+    },
+    {
+      "after_field": "Father Name",
+      "anchor": [
+        1623,
+        889
+      ]
+    }
+  ],
+  "info_scroll_triggers": [
+    {
+      "after_field": "Pada",
+      "anchor": [
+        1059,
+        597
+      ]
+    },
+    {
+      "after_field": "ECI Code",
+      "anchor": [
+        1060,
+        663
+      ]
+    }
+  ],
+  "info_panel_region": [
+    645,
+    279,
+    1070,
+    697
+  ],
+  "input_panel_region": [
+    1081,
+    284,
+    1638,
+    925
+  ],
+  "upload_button_pos": [
+    1323,
+    868
+  ],
+  "upload_ok_button_pos": [
+    1001,
+    605
+  ],
+  "take_screenshot_button_pos": [
+    844,
+    689
+  ],
+  "load_another_form_button_pos": [
+    1132,
+    690
+  ],
+  "upload_flow_region": [
+    704,
+    651,
+    1571,
+    733
+  ]
+}
