@@ -3202,6 +3202,9 @@ def capture_error_recovery_buttons():
     Mini learning mode: Captures the Start MPF button for blank page recoveries.
     Internet Error OK is bypassed using the Enter key.
     """
+    global SPEAK_ENABLED
+    SPEAK_ENABLED = True  # Guarantee speech is ON for learning
+
     mem = load_memory()
     if not mem:
         speak("No existing memory found. Please run full Learning Mode once before using this.")
@@ -3866,20 +3869,18 @@ def merge_info_dict(base: dict, incoming: dict) -> dict:
     return base
 
 def autofill_mode():
-    """Autofill one or more forms, then run the new Upload → Screenshot → Next-form loop.
-
-    The bot keeps filling new forms as long as:
-      - 'Load Another Form' keeps producing new member data in the info panel, and
-      - the upload flow is correctly configured.
-
-    Once no new forms appear, it waits ~7 minutes and then returns.
-    """
+    """Autofill one or more forms, then run the new Upload → Screenshot → Next-form loop."""
     global SPEAK_ENABLED
 
     mem = load_memory()
     if not mem:
+        # Briefly allow speech so the user knows it failed immediately
+        SPEAK_ENABLED = True
         speak("Memory not found. Run Learning Mode (F2) first.")
         return
+
+    # 🔇 MUTE TTS for the ENTIRE duration of Autofill Mode
+    SPEAK_ENABLED = False
 
     form_index = 0
     last_signature = None
@@ -3887,18 +3888,19 @@ def autofill_mode():
     while True:
         check_pause()
 
-        # NEW: wait for info panel to actually show data / new form
+        # wait for info panel to actually show data / new form
         ok, signature = _wait_for_info_panel(mem, last_signature, form_index)
         if not ok:
-            speak("No new forms detected. Waiting 7 minutes, then terminating.")
+            print("[INFO] No new forms detected. Waiting 7 minutes, then terminating.")
             _telegram_notify_no_forms("No new forms detected (info panel did not change)")
 
             resumed, _ = _grace_wait_for_new_form(mem, last_signature, timeout_seconds=7*60)
             if resumed:
-                speak("New form detected. Cancelled termination. Resuming autofill.")
+                print("[INFO] New form detected. Cancelled termination. Resuming autofill.")
                 _telegram_notify_recovery("New form data detected during grace wait. Termination cancelled.")
                 continue
 
+            # Restore speech before exiting
             SPEAK_ENABLED = True
             return
 
@@ -3906,34 +3908,34 @@ def autofill_mode():
         extracted = read_info_panel_full_before_autofill(mem)
         if not extracted:
             if form_index == 0:
-                speak("Could not extract data from information panel. Aborting autofill.")
+                print("[ERROR] Could not extract data from information panel. Aborting autofill.")
             else:
-                speak("No more forms detected in information panel. Waiting 7 minutes, then terminating.")
+                print("[INFO] No more forms detected in information panel. Waiting 7 minutes, then terminating.")
                 _telegram_notify_no_forms("No more forms detected in info panel (grace wait started)")
 
                 resumed, _ = _grace_wait_for_new_form(mem, last_signature, timeout_seconds=7*60)
                 if resumed:
-                    speak("New form detected. Cancelled termination. Resuming autofill.")
+                    print("[INFO] New form detected. Cancelled termination. Resuming autofill.")
                     continue
 
+                # Restore speech before exiting
                 SPEAK_ENABLED = True
                 return
 
 
         if last_signature is not None and signature == last_signature:
-            # The info panel did not change after Load Another Form -> assume no new forms
-            speak("Same form data detected again after loading. Assuming no new forms are available.")
-            speak("Waiting 7 minutes, then terminating.")
+            print("[INFO] Same form data detected again after loading. Assuming no new forms are available.")
+            print("[INFO] Waiting 7 minutes, then terminating.")
             _telegram_notify_no_forms("Same form detected again (grace wait started)")
 
             resumed, _ = _grace_wait_for_new_form(mem, last_signature, timeout_seconds=7*60)
             if resumed:
-                speak("New form detected. Cancelled termination. Resuming autofill.")
+                print("[INFO] New form detected. Cancelled termination. Resuming autofill.")
                 continue
 
+            # Restore speech before exiting
             SPEAK_ENABLED = True
             return
-
 
         last_signature = signature
         form_index += 1
@@ -3943,34 +3945,24 @@ def autofill_mode():
         }
 
         def find_value_for(name):
-                    # 1) Exact match only
-                    if name in extracted and extracted[name]:
-                        return extracted[name]
+            if name in extracted and extracted[name]:
+                return extracted[name]
+            if name in CODE_STRICT_FIELDS or name.strip().lower().endswith("code"):
+                return None
+            aliases = {
+                "sub cast": "Sub Cast",
+                "subcast": "Sub Cast",
+            }
+            alt = aliases.get(name)
+            if alt and extracted.get(alt):
+                return extracted[alt]
+            m = difflib.get_close_matches(name, extracted.keys(), n=1, cutoff=0.65)
+            return extracted[m[0]] if m else None
 
-                    # 2) NEVER fuzzy-match code fields (prevents PHI->RAI, MBI->RAI)
-                    if name in CODE_STRICT_FIELDS or name.strip().lower().endswith("code"):
-                        return None
-
-                    # 3) Optional aliases (non-code fields only)
-                    aliases = {
-                        "sub cast": "Sub Cast",
-                        "subcast": "Sub Cast",
-                    }
-                    alt = aliases.get(name)
-                    if alt and extracted.get(alt):
-                        return extracted[alt]
-
-                    # 4) Fuzzy match only for normal fields (safer cutoff)
-                    m = difflib.get_close_matches(name, extracted.keys(), n=1, cutoff=0.65)
-                    return extracted[m[0]] if m else None
-
-
-        # Keep TTS muted while actually filling fields
-        SPEAK_ENABLED = False
-        print(f"=== Autofill Mode Activated — Form {form_index} ===")
+        print(f"\n=== Autofill Mode Activated — Form {form_index} ===")
 
         cumulative_scroll_est = 0
-        failed_fields = []  # Collect fields that could not be filled
+        failed_fields = []  
 
         for field in mem.get('fields', []):
             fname = field.get('name')
@@ -3986,7 +3978,6 @@ def autofill_mode():
                     failed_fields.append(fname)
                     continue
 
-                # determine absolute position
                 if field.get('pos'):
                     abs_pos = tuple(field['pos'])
                 elif field.get('index') is not None and mem.get('anchor') and mem.get('spacing'):
@@ -3997,12 +3988,11 @@ def autofill_mode():
                     failed_fields.append(fname)
                     continue
 
-                # ensure visible on screen
                 screen_w, screen_h = pyautogui.size()
                 attempts = 0
                 main_anchor = mem.get('scrollbars', {}).get('main', None)
                 while abs_pos[1] > screen_h - 140 and attempts < 12:
-                    check_pause()  # <-- skip can trigger here too
+                    check_pause()
                     if main_anchor:
                         scroll_at(tuple(main_anchor), -5)
                     else:
@@ -4011,7 +4001,6 @@ def autofill_mode():
                     cumulative_scroll_est += 60
                     attempts += 1
 
-                # fill field silently
                 try:
                     if ftype == 'typing':
                         click_and_type_abs(abs_pos[0], abs_pos[1], val)
@@ -4044,9 +4033,6 @@ def autofill_mode():
                     failed_fields.append(fname)
                     continue
 
-                # Intelligent scroll rules (kept silent)
-                # (unchanged below...)
-
             except SkipFieldException:
                 print(f"[SKIP] User skipped field: {fname}")
                 safe_sleep(0.1)
@@ -4055,8 +4041,6 @@ def autofill_mode():
             finally:
                 SKIP_ENABLED = False
 
-
-            # Intelligent scroll rules (kept silent)
             if fname == "Religion":
                 if "input_panel_region" in mem and "main" in mem.get("scrollbars", {}):
                     region = tuple(mem["input_panel_region"])
@@ -4064,10 +4048,7 @@ def autofill_mode():
 
                     scrolled = scroll_until_disappears(anchor, region, "Religion", next_field="Cast")
                     if scrolled:
-                        safe_sleep(1.0)  # ✅ let UI settle before moving to Caste
-
-
-            
+                        safe_sleep(1.0) 
 
             elif fname == "Father Name":
                 if "input_panel_region" in mem and "main" in mem.get("scrollbars", {}):
@@ -4075,20 +4056,14 @@ def autofill_mode():
                     anchor = tuple(mem["scrollbars"]["main"])
                     scroll_to_end(anchor, region)
 
-            
-
             safe_sleep(0.05)
 
-        # --- Per-form report + upload cycle ---
-        # Speak one summary *before* we start Upload clicking
-        SPEAK_ENABLED = True
+        # Removed the 'SPEAK_ENABLED = True' that was unmuting here
         if failed_fields:
-           speak("Autofill completed with some issues for this form. Could not fill: " + ", ".join(failed_fields))
+           print(f"[WARNING] Autofill completed with issues for this form. Could not fill: {', '.join(failed_fields)}")
 
-
-        # Try to run the upload → screenshot → next-form logic.
         if not run_upload_and_next_form(mem):
-            # Upload flow failed or not configured; stop looping.
+            SPEAK_ENABLED = True
             return
 
         # After upload + Load Another Form, loop back and try to read a fresh form.
