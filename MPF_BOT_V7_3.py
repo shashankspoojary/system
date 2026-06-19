@@ -3779,21 +3779,29 @@ def _grace_wait_for_new_form(mem, last_signature, timeout_seconds=7*60, poll_int
     last_seen = None
     hits = 0
     
-    blank_page_timer = 40.0  # 40-second countdown for the blank page check
+    blank_page_timer = 40.0  # 40-second countdown for the blank page/internet error check
 
     while remaining > 0:
         check_pause()
         
-        # BLANK PAGE RECOVERY: If 40s pass with no new form, hit Start MPF
-        if blank_page_timer > 0:
-            blank_page_timer -= poll_interval
-            if blank_page_timer <= 0:
-                if start_mpf_pos:
-                    print("[RECOVERY] 40s passed with no new form. Assuming blank page. Clicking Start MPF...")
-                    click_abs(start_mpf_pos[0], start_mpf_pos[1])
-                    safe_sleep(2.0)
-                else:
-                    print("[RECOVERY] Blank page detected, but Start MPF position not saved.")
+        # BLANK PAGE / INTERNET ERROR RECOVERY LOOP
+        blank_page_timer -= poll_interval
+        if blank_page_timer <= 0:
+            if start_mpf_pos:
+                print("[RECOVERY] 40s passed with no new form. Pressing Enter to clear Internet Error, then clicking Start MPF...")
+                # 1. Press Enter to clear any invisible or visible Internet Error popup
+                pyautogui.press('enter')
+                safe_sleep(1.0)
+                
+                # 2. Click Start MPF to reload the form
+                click_abs(start_mpf_pos[0], start_mpf_pos[1])
+                safe_sleep(2.0)
+                
+                # 3. Reset the 40s timer to continuously loop this process until the 7 mins are up
+                blank_page_timer = 40.0  
+            else:
+                print("[RECOVERY] 40s passed, but Start MPF position not saved. Resetting timer.")
+                blank_page_timer = 40.0
 
         sig = quick_info_panel_signature_old(mem)
 
