@@ -4,12 +4,12 @@
       "Male": 138,
       "Female": 81,
       "male": 4204,
-      "female": 1959
+      "female": 1960
     },
     "marital status": {
       "Never Married": 125,
       "widowed": 1061,
-      "Awaiting Divorce": 832,
+      "Awaiting Divorce": 833,
       "Divorced": 743,
       "Never married": 3615
     },
@@ -33,7 +33,7 @@
       "Arunachal Pradesh": 55,
       "Kerala": 73,
       "Telangana": 136,
-      "Tamil Nadu": 120,
+      "Tamil Nadu": 121,
       "Chattisgarh": 48,
       "Manipur": 29,
       "Rajasthan": 90,
@@ -484,7 +484,7 @@
       "Pali": 1,
       "Chickmagalur": 1,
       "Mysore": 1,
-      "Pudukkottai": 1,
+      "Pudukkottai": 2,
       "Theni": 1,
       "Bishnupur": 1,
       "Kanpur Dehat": 1,
@@ -512,7 +512,7 @@
       "Ukhrul": 1
     },
     "house type": {
-      "Own": 3823,
+      "Own": 3824,
       "Lease": 1230,
       "Rental": 1276
     },
@@ -524,12 +524,12 @@
       "Bengali": 225,
       "Punjabi": 144,
       "Kannada": 232,
-      "Tamil": 115,
+      "Tamil": 116,
       "Gujarati": 157,
       "Odia": 15
     },
     "religion": {
-      "Hindu": 6287,
+      "Hindu": 6288,
       "Jain": 34
     },
     "cast": {
@@ -939,7 +939,7 @@
       "Dholi": 2,
       "Varmakar": 2,
       "Ranghar": 1,
-      "Vaniyar": 5,
+      "Vaniyar": 6,
       "Vora": 1,
       "Kurava": 1,
       "Madevashashetty": 1,
@@ -2151,7 +2151,7 @@
       "Rawani": 2,
       "Qureshi": 2,
       "Gonar": 1,
-      "Valayar": 1,
+      "Valayar": 2,
       "Vaaniga": 1,
       "Holar": 1,
       "Kayunllu": 1,
@@ -2263,7 +2263,7 @@
       "Rohini": 231,
       "Dhanishta / Avittam": 245,
       "Chitta / Chitra": 7,
-      "Mrigasira": 237,
+      "Mrigasira": 238,
       "Satabhisha / Sadayam": 4,
       "Ardra /Thiruvathirai": 11,
       "Bharani": 234,
@@ -2320,7 +2320,7 @@
       "Makara/Capricorn": 489,
       "Kumbha/Aquarius": 504,
       "Vrishchika/Scorpio": 512,
-      "Rishaba/Taurus": 498,
+      "Rishaba/Taurus": 499,
       "Mesha /Aries": 1,
       "Rishaba /Taurus": 3,
       "Kanya/ Virgo": 4,
@@ -2332,10 +2332,10 @@
       "3rd Pada": 1576,
       "4th Pada": 1546,
       "1st Pada": 1541,
-      "2nd Pada": 1538
+      "2nd Pada": 1539
     },
     "health info": {
-      "No Health Problems": 5660,
+      "No Health Problems": 5661,
       "Low BP": 104,
       "Diabetes": 85,
       "Other": 96,
@@ -2343,14 +2343,14 @@
       "High BP": 96
     },
     "any disability": {
-      "None": 6119,
+      "None": 6120,
       "Physical Disability": 78
     },
     "diet": {
       "Occasionally Non-Veg": 510,
       "Non-Veg": 4627,
       "Veg": 407,
-      "Eggetarian": 513,
+      "Eggetarian": 514,
       "Vegan": 107,
       "Jain": 23
     },
@@ -2363,7 +2363,7 @@
       "6.00 / 72 in / 182.9 cm / 1.83 m": 257,
       "5.05 / 65 in / 165.1 cm / 1.65 m": 270,
       "4.11 / 59 in / 149.9 cm / 1.50 m": 295,
-      "6.02 / 74 in / 188.0 cm / 1.88 m": 316,
+      "6.02 / 74 in / 188.0 cm / 1.88 m": 317,
       "5.10 / 70 in / 177.8 cm / 1.78 m": 310,
       "5.00 / 60 in / 152.4 cm / 1.52 m": 293,
       "5.11 / 71 in / 180.3 cm / 1.80 m": 291,
@@ -2379,7 +2379,7 @@
     },
     "weight": {
       "108 Kgs": 101,
-      "110 Kgs": 66,
+      "110 Kgs": 67,
       "45 Kgs": 84,
       "59 Kgs": 78,
       "57 Kgs": 80,
@@ -2461,30 +2461,30 @@
     },
     "father status": {
       "Alive": 4086,
-      "Passed Away": 2080
+      "Passed Away": 2081
     },
     "mother status": {
-      "Alive": 4615,
+      "Alive": 4616,
       "Passed Away": 1557
     },
     "sister": {
-      "No Sister": 2243,
+      "No Sister": 2244,
       "2 Sisters": 1536,
       "1 Sister": 2389
     },
     "brother": {
       "1 Brother": 2299,
       "No Brother": 2316,
-      "2 Brothers": 1553
+      "2 Brothers": 1554
     },
     "children boy": {
       "Not Applicable": 3623,
       "No Boy Baby": 1345,
-      "1 Boy Baby": 1199
+      "1 Boy Baby": 1200
     },
     "children girl": {
       "Not Applicable": 3623,
-      "No Girl Baby": 1766,
+      "No Girl Baby": 1767,
       "2 Girl Babies": 778
     },
     "education": {

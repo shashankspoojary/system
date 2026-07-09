@@ -1,0 +1,16 @@
+# MPF_BOT Core Dependencies
+PyAutoGUI==0.9.54
+keyboard==0.13.5
+numpy==2.3.5
+opencv-python==4.13.0.92
+pillow==12.2.0
+pytesseract==0.3.13
+pyttsx3==2.99
+requests==2.34.2
+colorama==0.4.6
+
+# 🔴 CRITICAL: Paddle Ecosystem (Locked for stability)
+# Do NOT upgrade PaddlePaddle past 3.2.2 to avoid the oneDNN/MKL-DNN bug
+paddlepaddle==3.2.2
+paddleocr==3.5.0
+paddlex==3.5.2

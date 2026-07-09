@@ -1,3 +1,4 @@
+
 # (Your complete script with DOB/mapping fixes)
 # Paste this entire block into your mpf_bot file (it is your original script with targeted fixes)
 
@@ -8,6 +9,7 @@ MPF Autofill Bot — Learning Mode with explicit scroll triggers + Autofill
 - Autofill Mode (F3): uses saved memory to fill fields, and reproduces recorded scrolls.
 - Memory file: bot_memory.json
 - Debug screenshots/logs: debug_logs/
+"""
 """
 import os
 import builtins
@@ -37,7 +39,7 @@ def _block_debug_open(file, mode='r', *args, **kwargs):
         return DummyFile() # Pretend the file opened successfully
     return _orig_open(file, mode, *args, **kwargs)
 builtins.open = _block_debug_open
-
+"""
 # =======================================================================
 import os
 import time
