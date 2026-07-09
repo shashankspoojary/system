@@ -4,12 +4,12 @@
       "Male": 138,
       "Female": 81,
       "male": 4204,
-      "female": 1960
+      "female": 1961
     },
     "marital status": {
       "Never Married": 125,
       "widowed": 1061,
-      "Awaiting Divorce": 833,
+      "Awaiting Divorce": 834,
       "Divorced": 743,
       "Never married": 3615
     },
@@ -33,7 +33,7 @@
       "Arunachal Pradesh": 55,
       "Kerala": 73,
       "Telangana": 136,
-      "Tamil Nadu": 121,
+      "Tamil Nadu": 122,
       "Chattisgarh": 48,
       "Manipur": 29,
       "Rajasthan": 90,
