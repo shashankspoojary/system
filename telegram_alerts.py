@@ -7,6 +7,7 @@ import json
 import os
 import platform
 import threading
+import ssl
 import time
 import urllib.parse
 import urllib.request
@@ -105,7 +106,7 @@ def send_telegram_message(text: str, force: bool = False) -> bool:
         data = urllib.parse.urlencode(payload).encode("utf-8")
         req = urllib.request.Request(url, data=data, method="POST")
         timeout = float(cfg.get("timeout_seconds") or 8)
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
+        with urllib.request.urlopen(req, timeout=timeout, context=ssl._create_unverified_context()) as resp:
             ok = (resp.status == 200)
         if ok:
             _mark_sent()
@@ -269,7 +270,7 @@ def get_last_chat_id() -> Optional[str]:
     url = f"https://api.telegram.org/bot{token}/getUpdates"
     try:
         timeout = float(cfg.get("timeout_seconds") or 8)
-        with urllib.request.urlopen(url, timeout=timeout) as resp:
+        with urllib.request.urlopen(url, timeout=timeout, context=ssl._create_unverified_context()) as resp:
             raw = resp.read().decode("utf-8", errors="ignore")
         data = json.loads(raw)
         results = data.get("result", [])
